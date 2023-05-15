@@ -95,7 +95,7 @@ export KBUILD_BUILD_VERSION="$ID"
 mkdir -p out
 
 make O=out clean && make O=out mrproper
-make "$DEFCONFIG" O=out
+make ARCH=arm64 O=out "$DEFCONFIG"
 
 echo -e "$yellow << compiling the kernel >> \n $white"
 
