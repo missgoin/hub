@@ -127,14 +127,14 @@ export IMG="$MY_DIR"/out/arch/arm64/boot/Image.gz-dtb
                 cd zip
                 export ZIP="$KERNEL_NAME_ALIAS"
 		zip -r9 "$ZIP" * -x .git README.md LICENSE *placeholder
+		echo "Zip: $ZIP"
+                curl -T $ZIP temp.sh; echo
 		
                 cd ..
                 rm -rf error.log
                 rm -rf out
                 rm -rf zip
                 rm -rf testing.log
-		
-		echo "Zip: $ZIP"
-                curl --upload-file $ZIP https://temp.sh/$ZIP; echo		
+				
                 exit
         fi
