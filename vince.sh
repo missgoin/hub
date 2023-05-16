@@ -125,12 +125,15 @@ export IMG="$MY_DIR"/out/arch/arm64/boot/Image.gz-dtb
                 cp -r "$IMG" zip/
                 cd zip
                 export ZIP="$KERNEL_NAME"-"$TYPE"-"$TGL"
-                curl --upload-file $ZIP https://temp.sh/$ZIP; echo
-	
+		zip -r9 "$ZIP" * -x .git README.md LICENSE *placeholder
+		
                 cd ..
                 rm -rf error.log
                 rm -rf out
                 rm -rf zip
                 rm -rf testing.log
+		
+		echo "Zip: $ZIP"
+                curl --upload-file $ZIP https://temp.sh/$ZIP; echo		
                 exit
         fi
