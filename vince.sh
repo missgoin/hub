@@ -29,7 +29,7 @@ if [[ ! -d "$MY_DIR" ]]; then MY_DIR="$PWD"; fi
 
 # Kernel build config
 TYPE="VINCE"
-KERNEL_NAME="SUPER"
+KERNEL_NAME="SUPER.KERNEL"
 DEVICE="Redmi 5 Plus"
 DEFCONFIG="vince-perf_defconfig"
 AnyKernel="https://github.com/missgoin/Anykernel3"
@@ -50,6 +50,10 @@ BRANCH="master"
 #REPO="azure-clang"
 #BRANCH="main"
 #git clone --depth=1  https://gitlab.com/Panchajanya1999/azure-clang.git clang
+
+# setup telegram env
+export WAKTU=$(date +"%T")
+export TGL=$(date +"%d-%m-%Y")
 
 # clang stuff
 echo -e "$green << cloning clang >> \n $white"
@@ -101,8 +105,8 @@ KOMIT=$(git log --pretty=format:'"%h : %s"' -1)
 BRANCH=$(git rev-parse --abbrev-ref HEAD)
 
 export IMG="$MY_DIR"/out/arch/arm64/boot/Image.gz-dtb
-export dtbo="$MY_DIR"/out/arch/arm64/boot/dtbo.img
-export dtb="$MY_DIR"/out/arch/arm64/boot/dtb.img
+#export dtbo="$MY_DIR"/out/arch/arm64/boot/dtbo.img
+#export dtb="$MY_DIR"/out/arch/arm64/boot/dtb.img
 
         if [ -f "$IMG" ]; then
                 echo -e "$green << selesai dalam $(($Diff / 60)) menit and $(($Diff % 60)) detik >> \n $white"
@@ -119,8 +123,6 @@ export dtb="$MY_DIR"/out/arch/arm64/boot/dtb.img
                 git clone --depth=1 "$AnyKernel" --single-branch -b "$AnyKernelbranch" zip
                 echo -e "$yellow << making kernel zip >> \n $white"
                 cp -r "$IMG" zip/
-                cp -r "$dtbo" zip/
-                cp -r "$dtb" zip/
                 cd zip
                 export ZIP="$KERNEL_NAME"-"$TYPE"-"$TGL"
                 zip -r9 "$ZIP" * -x .git README.md LICENSE *placeholder
