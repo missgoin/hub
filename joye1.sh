@@ -24,14 +24,27 @@ echo "               SUPER KERNEL          "
 echo -e "***********************************************$nocol"
 echo KERNEL VERSION IS "${KERNEL_VERSION}.${KERNEL_PATCHLEVEL}.${KERNEL_SUBLEVEL}"
 
+# clang config
+#REMOTE="https://gitlab.com"
+#TARGET="GhostMaster69-dev"
+#REPO="cosmic-clang"
+#BRANCH="master"
+
+# setup telegram env
+#export WAKTU=$(date +"%T")
+#export TGL=$(date +"%d-%m-%Y")
+	
+#export PATH="$HOME/clang/bin:$PATH"
+#export KBUILD_COMPILER_STRING=$("$HOME"/clang/bin/clang --version | head -n 1 | sed -e 's/  */ /g' -e 's/[[:space:]]*$//' -e 's/^.*clang/clang/')
+
 export PATH="$HOME/cosmic/bin:$PATH"
 export ARCH=arm64
 export SUBARCH=arm64
 export KBUILD_COMPILER_STRING="$($HOME/cosmic/bin/clang --version | head -n 1 | perl -pe 's/\(http.*?\)//gs' | sed -e 's/  */ /g' -e 's/[[:space:]]*$//')"
 
-if ! [ -d "$HOME/cosmic" ]; then
+if ! [ -d "$HOME/clang" ]; then
 echo "Cosmic clang not found! Cloning..."
-if ! git clone -q https://gitlab.com/GhostMaster69-dev/cosmic-clang.git --depth=1 --single-branch ~/cosmic; then
+if ! git clone https://gitlab.com/GhostMaster69-dev/cosmic-clang --depth=1 -b master ~/cosmic; then
 echo "Cloning failed! Aborting..."
 exit 1
 fi
