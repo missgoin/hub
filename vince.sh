@@ -30,7 +30,7 @@ if [[ ! -d "$MY_DIR" ]]; then MY_DIR="$PWD"; fi
 # Kernel build config
 TYPE="VINCE"
 KERNEL_NAME="SUPER.KERNEL"
-KERNEL_NAME_ALIAS="Kernulvinc"
+KERNEL_NAME_ALIAS="Kernulvin-$(date +"%d-%m-%Y").zip"
 DEVICE="Redmi 5 Plus"
 DEFCONFIG="vince-perf_defconfig"
 AnyKernel="https://github.com/missgoin/Anykernel3"
@@ -125,7 +125,7 @@ export IMG="$MY_DIR"/out/arch/arm64/boot/Image.gz-dtb
                 echo -e "$yellow << making kernel zip >> \n $white"
                 cp -r "$IMG" zip/
                 cd zip
-                export ZIP="$KERNEL_NAME_ALIAS"-"$TGL"
+                export ZIP="$KERNEL_NAME_ALIAS"
 		zip -r9 "$ZIP" * -x .git README.md LICENSE *placeholder
 		
                 cd ..
