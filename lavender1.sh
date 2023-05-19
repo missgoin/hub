@@ -71,8 +71,14 @@ Start=$(date +"%s")
 
 	make -j$(nproc --all) O=out \
                               ARCH=arm64 \
-                              LLVM=1 \
-			      LLVM_IAS=1 \
+                              LD=ld.lld \
+			      AR=llvm-ar \
+			      NM=llvm-nm \
+			      OBJCOPY=llvm-objcopy \
+			      OBJDUMP=llvm-objdump \
+			      STRIP=llvm-strip \
+			      READELF=llvm-readelf \
+			      OBJSIZE=llvm-size \
                               CC=clang \
                               CROSS_COMPILE=aarch64-linux-gnu- \
                               CROSS_COMPILE_ARM32=arm-linux-gnueabi-  2>&1 | tee error.log
