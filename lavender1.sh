@@ -71,14 +71,8 @@ Start=$(date +"%s")
 
 	make -j$(nproc --all) O=out \
                               ARCH=arm64 \
-                              AR=llvm-ar \
-                              NM=llvm-nm \
-                              LD=ld.lld \
-                              OBJCOPY=llvm-objcopy \
-                              OBJDUMP=llvm-objdump \
-                              STRIP=llvm-strip \
-			      READELF=llvm-readelf \
-			      OBJSIZE=llvm-size \
+                              LLVM=1 \
+			      LLVM_IAS=1 \
                               CC=clang \
                               CROSS_COMPILE=aarch64-linux-gnu- \
                               CROSS_COMPILE_ARM32=arm-linux-gnueabi-  2>&1 | tee error.log
@@ -100,7 +94,7 @@ export KBUILD_BUILD_VERSION="$ID"
 mkdir -p out
 
 make O=out clean && make O=out mrproper
-make ARCH=arm64 O=out "$DEFCONFIG"
+make ARCH=arm64 O=out "$DEFCONFIG" LLVM=1 LLVM_IAS=1
 
 echo -e "$yellow << compiling the kernel >> \n $white"
 
