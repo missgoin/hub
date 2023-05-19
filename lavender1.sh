@@ -41,15 +41,15 @@ ID="03"
 MESIN="Git Workflows"
 
 # clang config
-REMOTE="https://gitlab.com"
-TARGET="GhostMaster69-dev"
-REPO="cosmic-clang"
-BRANCH="master"
-
 #REMOTE="https://gitlab.com"
-#TARGET="Panchajanya1999"
-#REPO="azure-clang"
-#BRANCH="main"
+#TARGET="GhostMaster69-dev"
+#REPO="cosmic-clang"
+#BRANCH="master"
+
+REMOTE="https://gitlab.com"
+TARGET="Panchajanya1999"
+REPO="azure-clang"
+BRANCH="main"
 #git clone --depth=1  https://gitlab.com/Panchajanya1999/azure-clang.git clang
 
 # setup telegram env
@@ -61,8 +61,8 @@ echo -e "$green << cloning clang >> \n $white"
 	git clone --depth=1 -b "$BRANCH" "$REMOTE"/"$TARGET"/"$REPO" "$HOME"/clang
 	
         export PATH="$HOME/clang/bin:$PATH"
-        export KBUILD_COMPILER_STRING=$("$HOME"/clang/bin/clang --version | head -n 1 | sed -e 's/  */ /g' -e 's/[[:space:]]*$//' -e 's/^.*clang/clang/')
-        #export KBUILD_COMPILER_STRING=$("$HOME"/clang/bin/clang --version | head -n 1 | perl -pe 's/\(http.*?\)//gs' | sed -e 's/  */ /g' -e 's/[[:space:]]*$//')
+        #export KBUILD_COMPILER_STRING=$("$HOME"/clang/bin/clang --version | head -n 1 | sed -e 's/  */ /g' -e 's/[[:space:]]*$//' -e 's/^.*clang/clang/')
+        export KBUILD_COMPILER_STRING=$("$HOME"/clang/bin/clang --version | head -n 1 | perl -pe 's/\(http.*?\)//gs' | sed -e 's/  */ /g' -e 's/[[:space:]]*$//')
 
 # Setup build process
 
@@ -94,7 +94,7 @@ export KBUILD_BUILD_VERSION="$ID"
 mkdir -p out
 
 make O=out clean && make O=out mrproper
-make ARCH=arm64 O=out "$DEFCONFIG" LLVM=1 LLVM_IAS=1
+make ARCH=arm64 O=out "$DEFCONFIG"
 
 echo -e "$yellow << compiling the kernel >> \n $white"
 
